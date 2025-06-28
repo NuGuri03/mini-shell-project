@@ -27,7 +27,7 @@ void disable_raw_mode(struct termios* orig_termios) {
 * @brief Reads a line of input from the user.
 * @return A pointer to a string containing the input line, or NULL on EOF or error.
 */
-char* read_input(history* history_list) {
+char* read_input(struct history* history_list) {
     struct termios orig_termios;
     enable_raw_mode(&orig_termios);
 
@@ -104,11 +104,11 @@ char* read_input(history* history_list) {
     return buffer;
 }
 
-void save_history_to_file(history* history_list, const char* filename) {
+void save_history_to_file(struct history* history_list, const char* filename) {
     FILE* fp = fopen(filename, "w");
     if (!fp) return;
 
-    history_node* curr = history_list->head->next;
+    struct node* curr = history_list->head->next;
     while (curr != history_list->tail) {
         fprintf(fp, "%s\n", curr->command);
         curr = curr->next;
@@ -117,7 +117,7 @@ void save_history_to_file(history* history_list, const char* filename) {
     fclose(fp);
 }
 
-void load_history_from_file(history** history_list, const char* filename) {
+void load_history_from_file(struct history** history_list, const char* filename) {
     FILE* fp = fopen(filename, "r");
     if (!fp) return;
 
@@ -145,7 +145,7 @@ void print_prompt() {
 
 int main() {
 
-    history* history_list = create_history();
+    struct history* history_list = create_history();
     load_history_from_file(&history_list, "history.txt");
 
     while (true) {
@@ -156,7 +156,7 @@ int main() {
         }
 
         int num_cmds;
-        Command* cmds = parse_input(input, &num_cmds);
+        struct command* cmds = parse_input(input, &num_cmds);
 
         if (!strcmp(input, "exit")) {
             free(input);

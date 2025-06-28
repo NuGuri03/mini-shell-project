@@ -8,27 +8,27 @@
 
 #define MAX_COMMAND_SIZE 1024
 
-typedef struct {
+struct command {
     char* name;
     char** args;
     int argc;
 
     char* input_file;
     char* output_file;
+    enum redirect_type redirect_type;
     bool is_background;
-    RedirectType redirect_type;
-} Command;
+};
 
 // 사용자 입력 파싱하기
-Command parse_single_command(char *input);
+struct command parse_single_command(char *input);
 
 // 메모리 공간 생성
 char* create_char_mem();
 
-Command* parse_input(char *input, int* num_cmds);
+struct command* parse_input(char *input, int* num_cmds);
 
 // 메모리 해제
-void free_command(Command* cmd);
-void free_commands(Command* cmds, int num_cmds);
+void free_command(struct command* cmd);
+void free_commands(struct command* cmds, int num_cmds);
 
 #endif

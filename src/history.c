@@ -4,11 +4,11 @@
 
 #include "history.h"
 
-history* create_history(){
-    history* history_list = (history*)malloc(sizeof(history));
+struct history* create_history(){
+    struct history* history_list = (struct history*)malloc(sizeof(struct history));
     
-    history_list->head = (history_node*)malloc(sizeof(history_node));
-    history_list->tail = (history_node*)malloc(sizeof(history_node));
+    history_list->head = (struct node*)malloc(sizeof(struct node));
+    history_list->tail = (struct node*)malloc(sizeof(struct node));
     history_list->head->command = strdup("");
     history_list->tail->command = strdup("");
     history_list->head->prev = NULL;
@@ -20,8 +20,8 @@ history* create_history(){
 }
 
 // history_list에 명령어 추가하기
-void add_history_node(history** history_list, char* command) {
-    history_node* x = (history_node*)malloc(sizeof(history_node));
+void add_history_node(struct history** history_list, char* command) {
+    struct node* x = (struct node*)malloc(sizeof(struct node));
     x->command = strdup(command);
 
     // tail 앞에 삽입
@@ -35,11 +35,11 @@ void add_history_node(history** history_list, char* command) {
     (*history_list)->curr = (*history_list)->tail;
 }
 
-void free_history_list(history* history_list) {
-    history_node* curr = history_list->head->next;
+void free_history_list(struct history* history_list) {
+    struct node* curr = history_list->head->next;
 
     while (curr != NULL && curr != history_list->tail) {
-        history_node* next = curr->next;
+        struct node* next = curr->next;
 
         if (curr->command != NULL) {
             free(curr->command); 

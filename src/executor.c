@@ -11,7 +11,7 @@
 #include "redirect.h"
 
 // 내부 명령어 처리
-int handle_internal_command(Command cmd) {
+int handle_internal_command(struct command cmd) {
     if (strcmp(cmd.name, "cd") == 0) {
         if (cmd.args[1] == NULL) {
             fprintf(stderr, "cd: 경로를 입력하세요.\n");
@@ -63,7 +63,7 @@ int handle_internal_command(Command cmd) {
 }
 
 
-int execute_commands(Command* cmds, int num_cmds) {
+int execute_commands(struct command* cmds, int num_cmds) {
  
     int pipe_fd[2] = {-1,-1};
     int prev_read_fd = -1;

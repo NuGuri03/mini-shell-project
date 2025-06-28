@@ -1,20 +1,20 @@
 #ifndef HISTORY_H
 #define HISTORY_H
 
-typedef struct Node {
+struct node {
     char* command;
-    struct Node* prev;
-    struct Node* next;
-} history_node;
+    struct node* prev;
+    struct node* next;
+};
 
-typedef struct History {
-    history_node* head;
-    history_node* tail;
-    history_node* curr;
-} history;
+struct history {
+    struct node* head;
+    struct node* tail;
+    struct node* curr;
+};
 
-history* create_history();
-void add_history_node(history** history_list, char* commad);
-void free_history_list(history* history_list);
+struct history* create_history();
+void add_history_node(struct history** history_list, char* commad);
+void free_history_list(struct history* history_list);
 
 #endif

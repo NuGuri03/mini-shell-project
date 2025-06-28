@@ -17,11 +17,11 @@ char* create_char_mem() {
 
 
 // 사용자 입력 파싱하기
-Command parse_single_command(char *input) {
+struct command parse_single_command(char *input) {
     int capacity = 2;
     int arg_check = 0;
 
-    Command cmd;
+    struct command cmd;
     cmd.name = create_char_mem();
     cmd.args = (char**)malloc(sizeof(char*) * capacity);
     cmd.argc = 0;
@@ -135,11 +135,11 @@ Command parse_single_command(char *input) {
 
 
 
-Command* parse_input(char *input, int* num_cmds) {
+struct command* parse_input(char *input, int* num_cmds) {
     int capacity = 2;
     *num_cmds = 0;
 
-    Command* cmds = malloc(sizeof(Command) * capacity);
+    struct command* cmds = malloc(sizeof(struct command) * capacity);
     if (!cmds) {
         fprintf(stderr, "Command 배열 메모리 할당 실패\n");
         exit(EXIT_FAILURE);
@@ -161,7 +161,7 @@ Command* parse_input(char *input, int* num_cmds) {
 
         if (*num_cmds == capacity) {
             capacity *= 2;
-            cmds = realloc(cmds, sizeof(Command) * capacity);
+            cmds = realloc(cmds, sizeof(struct command) * capacity);
             if (!cmds) {
                 fprintf(stderr, "Command 배열 메모리 재할당 실패\n");
                 exit(EXIT_FAILURE);
@@ -178,7 +178,7 @@ Command* parse_input(char *input, int* num_cmds) {
 }
 
 // Command 메모리 해제 함수
-void free_command(Command* cmd) {
+void free_command(struct command* cmd) {
     free(cmd->name);
     for (int i = 0; i < cmd->argc; i++) {
         free(cmd->args[i]);
@@ -188,7 +188,7 @@ void free_command(Command* cmd) {
     free(cmd->output_file);
 }
 
-void free_commands(Command* cmds, int num_cmds) {
+void free_commands(struct command* cmds, int num_cmds) {
     for (int i = 0; i < num_cmds; i++) {
         free_command(&cmds[i]);
     }
