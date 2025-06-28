@@ -9,7 +9,9 @@ enum redirect_type {
 };
 
 int handle_input_redirect(char* input_file);
+
 int handle_output_redirect(char* output_file);
+
 int handle_append_redirect(char* output_file);
 
 #endif

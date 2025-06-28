@@ -26,8 +26,10 @@ char* create_char_mem();
 
 struct command* parse_input(char *input, int* num_cmds);
 
+
 // 메모리 해제
 void free_command(struct command* cmd);
+
 void free_commands(struct command* cmds, int num_cmds);
 
 #endif

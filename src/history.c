@@ -51,3 +51,29 @@ void free_history_list(struct history* history_list) {
 
     free(history_list);
 }
+
+void save_history_to_file(struct history* history_list, const char* filename) {
+    FILE* fp = fopen(filename, "w");
+    if (!fp) return;
+
+    struct node* curr = history_list->head->next;
+    while (curr != history_list->tail) {
+        fprintf(fp, "%s\n", curr->command);
+        curr = curr->next;
+    }
+
+    fclose(fp);
+}
+
+void load_history_from_file(struct history** history_list, const char* filename) {
+    FILE* fp = fopen(filename, "r");
+    if (!fp) return;
+
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), fp)) {
+        buffer[strcspn(buffer, "\n")] = 0;
+        add_history_node(history_list, buffer);
+    }
+
+    fclose(fp);
+}
