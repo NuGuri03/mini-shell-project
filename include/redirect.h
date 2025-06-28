@@ -1,8 +1,6 @@
 #ifndef REDIRECT_H
 #define REDIRECT_H
 
-#include <stdio.h>
-
 typedef enum {
     NO_REDIRECT,
     REDIRECT_INPUT,

@@ -2,6 +2,7 @@
 #define PARSER_H
 
 #include <stdbool.h>
+
 #include "redirect.h"
 #include "history.h"
 
@@ -26,7 +27,8 @@ char* create_char_mem();
 
 Command* parse_input(char *input, int* num_cmds);
 
-// cmd free
+// 메모리 해제
 void free_command(Command* cmd);
 void free_commands(Command* cmds, int num_cmds);
+
 #endif

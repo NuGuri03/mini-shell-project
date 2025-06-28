@@ -1,22 +1,17 @@
 #ifndef HISTORY_H
 #define HISTORY_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct History_node{
-
+typedef struct Node {
     char* command;
-    struct History_node* prev;
-    struct History_node* next;
-}history_node;
+    struct Node* prev;
+    struct Node* next;
+} history_node;
 
-typedef struct History{
-
+typedef struct History {
     history_node* head;
     history_node* tail;
     history_node* curr;
-}history;
+} history;
 
 history* create_history();
 void add_history_node(history** history_list, char* commad);
