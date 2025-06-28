@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <termios.h>
 
@@ -148,7 +147,7 @@ int main() {
     struct history* history_list = create_history();
     load_history_from_file(&history_list, "history.txt");
 
-    while (true) {
+    while (1) {
         print_prompt();
         char *input = read_input(history_list);
         if (input == NULL) {

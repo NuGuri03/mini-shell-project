@@ -27,7 +27,7 @@ struct command parse_single_command(char *input) {
     cmd.argc = 0;
     cmd.input_file = NULL;
     cmd.output_file = NULL;
-    cmd.is_background = false;
+    cmd.is_background = 0;
     cmd.redirect_type = NO_REDIRECT;
 
     int len = strlen(input);
@@ -123,7 +123,7 @@ struct command parse_single_command(char *input) {
     }
 
     if (strcmp(cmd.args[cmd.argc - 1], "&") == 0) {
-        cmd.is_background = true;
+        cmd.is_background = 1;
         cmd.argc -= 1;
     }
 
@@ -141,7 +141,7 @@ struct command* parse_input(char *input, int* num_cmds) {
 
     struct command* cmds = malloc(sizeof(struct command) * capacity);
     if (!cmds) {
-        fprintf(stderr, "Command 배열 메모리 할당 실패\n");
+        fprintf(stderr, "command 배열 메모리 할당 실패\n");
         exit(EXIT_FAILURE);
     }
 
@@ -163,7 +163,7 @@ struct command* parse_input(char *input, int* num_cmds) {
             capacity *= 2;
             cmds = realloc(cmds, sizeof(struct command) * capacity);
             if (!cmds) {
-                fprintf(stderr, "Command 배열 메모리 재할당 실패\n");
+                fprintf(stderr, "command 배열 메모리 재할당 실패\n");
                 exit(EXIT_FAILURE);
             }
         }

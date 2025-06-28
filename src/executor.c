@@ -130,7 +130,7 @@ int execute_commands(struct command* cmds, int num_cmds) {
             }
         }
         else{
-            if (cmds[i].is_background == false) {
+            if (cmds[i].is_background == 0) {
                 int status;
                 if (waitpid(pid, &status, 0) == -1) {
                     perror("waitpid failed");

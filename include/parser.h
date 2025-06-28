@@ -1,8 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include <stdbool.h>
-
 #include "redirect.h"
 #include "history.h"
 
@@ -13,10 +11,11 @@ struct command {
     char** args;
     int argc;
 
+    enum redirect_type redirect_type;
     char* input_file;
     char* output_file;
-    enum redirect_type redirect_type;
-    bool is_background;
+    
+    int is_background;
 };
 
 // 사용자 입력 파싱하기
