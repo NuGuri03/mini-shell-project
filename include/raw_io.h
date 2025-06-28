@@ -5,7 +5,7 @@
 
 #include "history.h"
 
-void enable_raw_mode(struct termios *orig_termios);
+struct termios enable_raw_mode();
 
 
 void disable_raw_mode(struct termios *orig_termios);
