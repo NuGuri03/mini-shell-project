@@ -19,7 +19,7 @@ void print_prompt() {
 
     // get user information
     user = getenv("USER");
-    if (user != NULL) {
+    if (user == NULL) {
         struct passwd *pw = getpwuid(getuid());
         user = pw ? pw->pw_name : "unknown";
     }
@@ -46,7 +46,7 @@ void print_prompt() {
             user, hostname
         );
     }
-    
+
     fflush(stdout);
 }
 
