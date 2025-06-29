@@ -29,7 +29,10 @@ int main() {
     while (1) {
         print_prompt();
         char *input = read_input(history);
+
         if (input == NULL) {
+            save_history_to_file(history, "history.txt");
+            printf("\nBye!\n");
             break;
         }
 
