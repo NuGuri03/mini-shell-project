@@ -57,9 +57,10 @@ dkms.conf
 .directory
 .Trash-*
 .nfs*
+.DS_Store
 
-### VisualStudioCode ###
-.vscode/*
+### Visual Studio Code ###
+.vscode/
 
 # Local History for Visual Studio Code
 .history/
@@ -67,12 +68,10 @@ dkms.conf
 # Built Visual Studio Code Extensions
 *.vsix
 
-# test folder
-/test
+# Test folder
+test/
 
-# others
+# Others
 mysh
 /build/
-
-#history.txt
-history.txt
+/history.txt
