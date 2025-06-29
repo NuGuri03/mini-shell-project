@@ -9,7 +9,7 @@
 ```bash
 make clean
 make
-./build/shell
+./mysh
 ```
 
 ---
