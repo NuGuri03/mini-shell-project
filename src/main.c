@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <pwd.h>
 
 #include "parser.h"
 #include "executor.h"
@@ -12,14 +13,43 @@
  * @brief Print prompt with flush.
  */
 void print_prompt() {
+    char hostname[256];
+    char *user;
     char cwd[1024];
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        printf("mysh::%s> ", cwd);
-    } else {
-        printf("mysh::~> ");
+
+    // get user information
+    user = getenv("USER");
+    if (user != NULL) {
+        struct passwd *pw = getpwuid(getuid());
+        user = pw ? pw->pw_name : "unknown";
     }
+
+    // get host
+    if (gethostname(hostname, sizeof(hostname)) != 0) {
+        strcpy(hostname, "unknown");
+    }
+
+    // get directory
+    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        // mysh(보라), user@host(파랑), 경로(초록)
+        printf(
+            "\033[1;35mmysh\033[0m::"
+            "\033[1;34m%s@%s\033[0m:"
+            "\033[1;32m%s\033[0m> ",
+            user, hostname, cwd
+        );
+    } 
+    else {
+        printf(
+            "\033[1;35mmysh\033[0m::"
+            "\033[1;34m%s@%s\033[0m::~> ",
+            user, hostname
+        );
+    }
+    
     fflush(stdout);
 }
+
 
 int main() {
 
