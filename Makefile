@@ -4,12 +4,6 @@ SRCDIR = src
 BUILDDIR = build
 TARGET = mysh
 
-ifeq ($(OS),Windows_NT)
-	EXT = .exe
-else
-	EXT =
-endif
-
 TARGET_BIN = $(TARGET)$(EXT)
 
 SRCS = $(wildcard $(SRCDIR)/*.c)
