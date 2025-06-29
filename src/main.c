@@ -23,12 +23,12 @@ void print_prompt() {
 
 int main() {
 
-    struct history* history_list = create_history();
-    load_history_from_file(&history_list, "history.txt");
+    struct history* history = create_history();
+    load_history_from_file(&history, "history.txt");
 
     while (1) {
         print_prompt();
-        char *input = read_input(history_list);
+        char *input = read_input(history);
         if (input == NULL) {
             break;
         }
@@ -39,8 +39,8 @@ int main() {
         if (!strcmp(input, "exit")) {
             free(input);
             free_commands(cmds, num_cmds);
-            save_history_to_file(history_list, "history.txt");
-            free_history_list(history_list);
+            save_history_to_file(history, "history.txt");
+            free_history(history);
             printf("Bye!\n");
             break;
         }
