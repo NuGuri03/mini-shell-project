@@ -57,7 +57,7 @@ int handle_internal_command(struct command cmd) {
     // unset
     if (strcmp(cmd.name, "unset") == 0) {
         if (cmd.args[1] == NULL) {
-            fprintf(stderr, "unset : 삭제할 환경 변수를 입력하세요.\n");
+            fprintf(stderr, "unset: 삭제할 환경 변수를 입력하세요.\n");
         } 
         else {        
             char* key = cmd.args[1];
