@@ -34,8 +34,15 @@ char* read_input(struct history* history_list) {
     while (1) {
         read(STDIN_FILENO, &c, 1);
 
+        // EOF (Ctrl + D)
+        if (c == 0x04) {
+            disable_raw_mode(&orig_termios);
+            free(buffer);
+            return NULL;
+        }
+
         // Press Enter('\n)
-        if (c == '\n') {
+        else if (c == '\n') {
             buffer[len] = '\0';
             if (strcmp(buffer, "")) {
                 add_history_node(&history_list, buffer);
