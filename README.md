@@ -33,11 +33,13 @@ make
 mini-shell-project/
 ├── include/        # 헤더 파일 (.h)
 │   ├── executor.h
+│   ├── raw_io.h
 │   ├── parser.h
 │   ├── history.h
 │   └── redirect.h
 ├── src/            # 소스 코드 (.c)
 │   ├── main.c
+│   ├── raw_io.c
 │   ├── parser.c
 │   ├── history.c
 │   ├── redirect.c
